@@ -1,0 +1,311 @@
+import sys
+import math
+import random
+import functools
+print - functools.partial(print, flush=True)
+#HELPER FUNCTIONS (used throughtout the program
+def get_float(prompt):
+    while True:
+        try:
+            print(prompt, end="", flush=True)
+            sys.stdout.flush()
+            return float(input)
+        except ValueError:
+            print("  >> Invalid input received. Existing program.")
+            raise SystemExit
+def get_int(prompt):
+    while True:
+        try:
+            print(prompt, end="", flush=True)
+            sys.stdout.flush()
+            return int (input())
+        except ValueError:
+            print(" >>Invalid input. Please type a whole number(e.g., 5, -3, 0).")
+            except EOFError:
+                print("\n >> No input received. Existing program>")
+                raise SystemExit
+
+def pause():
+    """Pauses so the user, can read the result before the menu reappears."""
+    safe_input("\nPress ENTER to return to the menu...")
+def print_header(title):
+    print("\n" + "-" + 70)
+    print(f" {title}")
+    print("-" + 70)
+def trig_menu():
+    print_header("TRIGONOMETRIC (CIRCULAR) FUNCTIONS")
+    print("""
+    1. Show the value of pi
+    2. Convert degree -> radians
+    3. Convert radians -> degrees
+    4. Compute sin, cos, tan of an angle (you enter degrees)
+    5. Compute asin, acos, atan of a value (-1 to 1 for asin/acos)
+    0. Back to Main Menu
+""")
+choice = safe_input("Enter your choice:").strip()
+
+    if choice == "1":
+        print(f"\mmath.pi = {math.pi}")
+
+    elif choice == "2":
+        deg = get_float("Enter an angle in degrees: ")
+        rad = math.radians(deg)
+        
+        print(f"\n{deg} degrees = {rad} radians")
+    elif choice == "3":
+        rad = get.float("Enter an angle in degrees: ")
+        deg = math.degrees(rad)
+        print(f"\n{deg} degrees = {rad} radians")
+    elif choice == "4":
+        deg = get_float("Enter an angle in degrees: ")
+        rad = math.radians(deg) #sin/cos/tan expect radians!
+        print(f"\nAngle = {deg} degrees ({rad} radians)")
+        print(f" sin ({deg}) = {math.sin(rad)}")
+        print(f" cos ({deg}) = {math.cos(rad)}")
+        print(f" tan ({deg}) = {math.tan(rad)}")
+
+    elif choice == "5":
+        val = get_float("Enter a value: ")
+        print()
+        try:
+            print(f" asin({val}) = {math.asin(val0} radians"
+                  f"(math.degrees{math.asin(val))} degrees)")
+        except ValueError:
+            print(" acos(x) needs -1 <= 1. Skiped.")
+        print(f" atan({val}) = {math.atan(val)} radians "
+              f"{(math.degrees(math.atan(val))} degrees)")
+
+    elif choice == "0":
+        return
+    else:
+        print("\nIvalid Choice.")
+
+#SECTION 2: HYPERBOLIC FUNCTIONS
+def hyperbolic_menu():
+    print_header("HYPERBOLIC FUNCTIONS")
+    print("""
+    1.Compute sinh, cosh, tanh of a value
+    2.Compute asinh, acosh, atanh, of a value
+    0.Back to Main Menu
+""")
+    choice = safe_input("Enter your choice:").strip()
+
+    if choice == "1":
+        x = get_float("Enter value x: ")
+        print(f"\n sinh({x}) = {math.sinh(x)}")
+        print(f"\n cosh({x}) = {math.sinh(x)}")
+        print(f"\n tanh({x}) = {math.sinh(x)}")
+
+    elif choice == "2":
+        x = get_float("Enter value x: ")
+        print()
+        print(f"\n asinh({x}) = {math.sinh(x)}")
+        try:
+            print(f"\n acosh({x}) = {math.sinh(x)}")
+        except ValueError:
+                print(" acosh(x) needs x >=1. Skipped.")
+        try:
+            print(f"\n atanh({x}) = {math.sinh(x)}")
+        except ValueError:
+            print(" atanh(x) needs -1 < x < 1.  Skipped.")
+
+        elif choice == "0":
+            return
+        else:
+            print("\nIvalid Choice.")
+        pause()
+
+#SECTIOM 3: EXPONENTIATION AND LOGARITHMS
+
+def exponents_menu():
+    print_header("EXPONENTIATION AND LOGARITHMS")
+    print("""
+1. Show the value e
+2. Compute the natural log, log10, and log 2 of a value
+3. Compute log(x, base) with a custom base
+4. Compute log(x, base) with a custom base 
+5. Compute pow(x, y) -  build-in vs math.pow
+""")
+    choice = safe_input("Enter your choice: ").strip()
+
+    if choice == "1":
+        print(f"\nmath.e = {math.e}")
+
+    elif choice == "2":
+        x = get_float("Enter x: ")
+        print(f"\nexp({x}) = e^{x} = {math.exp(x)}")
+
+    elif choice == "3":
+        x = get_float("Enter a positive number x: ")
+        try:
+            print(f"\n log({x}) = {math.log(x){natural log, base e)")
+            print(f" log10({10}) = {math.log10(x)}")
+            print(f" log2({x}) = {math.log2(x)}")
+        except ValueError:
+            print(" Logarithms require x  > 0. Please try again.")
+
+        elif choice == "4":
+            x = get_float("Enter x (must be > 0: ")
+            b = get_float("Enter the base b (must be >  0 and ! = 1:")
+            try:
+                print(f"\nlog({x}), base={b}) = math.log(x,b)}")
+            except (ValueError, ZeroDivisionError):
+                print(" Invalid input for a logarithm with that base.")
+
+            elif choice == "5":
+                x = get_float("Enter the base x: ")
+                y = get_float("Enter the exponent y: ")
+                print(f"\n Build-in pow ({x}, {y}) = {pow(x,y)")
+                print(f"\n math.pow({x}, {y}) = {math.pow(x,y)}")
+                print(" (Note: pow() can return an int for integer inputs: "
+                      "math.pow() always returns a float .)")
+
+                elif choice == "0":
+                    return
+                else:
+                    print("\nInvalid choice.")
+
+                pause()
+
+#SECTION 4: GENERAL-PURPOSE MATH FUNCTIONS
+def gemeral_menu():
+    print_header("GENERAL-PURPOSE MATH FUNCTIONS")
+    print("""
+1. Compute ceil, floor and turnc of a value
+2. Compute factorial
+3. Compute the hypotenuse of a right triangle
+0. Back to Main Menu
+""")
+    choice = safe_input("Enter your choice: ").strip()
+
+    if choice == "1":
+        x = get_float("Enter a decimal number x: ")
+        print(f"\n ceil({x}) = {math.ceil(x)}")
+        print(f"\n floor({x}) = {math.foor(x)}")
+        print(f"\n trunc({x}) = {math.trunc(x)}")
+
+    elif choice == "2":
+        n = get_float("Enter a non-negative whole
+                
+            
+                  
+                  
+    
+
+
+        
+            
+        
+
+            
+        
+        
+
+    
+
+        
+
+        
+        
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#MAIN MENU / ENTRY POINT
+#CODE PROPER
+def main():
+    print("=" * 70)
+    print("WELCOME TO THE MATH MODULE MINI SYSTEM")
+    print("A learning tool for Python's 'math' and 'random' module")
+    print("-"*)
+
+
+    while True:
+        print("""
+MAIN MENU
+    1. Trigonometric (circular) functions - sin, cos, tan, pi, radians...
+    2. Hyperbolic function                - sinh, cosh, tanh, asinh...
+    3. Exponential & logarithmic function - e, exp, log, log10, log2 pow
+    4. General - purpose math functions   - ceil, floor, trune, factorial, hypot
+    5. Random module                      - seed, randrange, radiant, choice, sample
+    0. Exit the program
+""")
+        choice - safe_input("Enter you choice (0-5): ").strip()
+
+        if choice == "1":
+            trig_menu()
+        elif choice == "2":
+            hyperboic_menu()
+        elif choice == "3":
+            exponen_menu()
+        elif choice == "4":
+            general_menu()
+        elif choice == "5":
+            random_menu()
+        elif choice == "0":
+            print("n/ Thank you for exploring the math and random module.)   "Goodbye!")
+            break
+        else:
+        print("/nInvalid choice. Please enter a number from 0 to 5.")
+
+        if_name_==_main_":
+            try:
+                main()
+            except KeyboardInterrupt:
+                print("\n\nProgram interrupted by user. Goodbye!")
+            except SystemExit:
+                pass
+            
+        
+            
